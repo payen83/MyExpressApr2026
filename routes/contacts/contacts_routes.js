@@ -19,6 +19,21 @@ router.get('/add', (req, res) => {
     renderFormPage(res);
 });
 
+router.get( '/:id', (req, res) => {
+  const contact = contacts.find( c => c.id == req.params.id );
+
+  if ( !contact ) {
+    return res.status( 404 ).send( 'Contact not found' );
+  }
+
+  res.render( 'contact/contact_details', {
+    title: 'Contact Details',
+    content: 'View detailed information about this contact.', 
+    contact
+  });
+});
+
+
 function renderFormPage(res, error = null){
     res.render('contact/contact_form', {
         title: 'Add New Contact',

@@ -34,4 +34,7 @@ app.use('/blogs', blogRoutes);
 const contactRoutes = require('./routes/contacts/contacts_routes');
 app.use('/contacts', contactRoutes);
 
+const usersRoutes = require('./routes/users/users_routes');
+app.use('/users', usersRoutes);
+
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

@@ -14,31 +14,37 @@
             <p><%=content %></p>
         </div>
         <div class="form-container">
+            <% if(error){ %>
+                <div class="error"><%=error %></div>
+            <% } %>
             <form action="<%=formAction %>" method="POST">
                 <label for="name">Name</label>
                 <input 
                     type="text"
                     name="name"
                     placeholder="Enter full name"
-                    value="<%=''%>"
+                    value="<%=user ? user.name : ''%>"
                 />
-                <label for="phone">Email Address</label>
+                <label for="email">Email Address</label>
                 <input 
                     type="text"
                     name="email"
                     placeholder="Enter email address"
-                    value="<%=''%>"
+                    value="<%=user ? user.email : ''%>"
                 />
                 <label for="phone">Phone No.</label>
                 <input 
                     type="text"
                     name="phone"
                     placeholder="Enter phone number"
-                    value="<%=''%>"
+                    value="<%=user ? user.phone : ''%>"
                 />
+                <% if(user) { %>
+                    <input type="hidden" name="_method" value="PUT">
+                <% } %>
                 <div class="button-group">
                     <button type="submit" class="save-btn">
-                        <i class="fa-solid fa-floppy-disk"></i> Save
+                        <i class="fa-solid fa-floppy-disk"></i> <%= user ? 'UPDATE':'SAVE'%>
                     </button>
                     <a href="/users" class="back-button">
                         <i class="fa-solid fa-arrow-left"></i> Back

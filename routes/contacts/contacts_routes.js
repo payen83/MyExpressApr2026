@@ -33,7 +33,6 @@ router.get( '/:id', (req, res) => {
   });
 });
 
-
 function renderFormPage(res, error = null){
     res.render('contact/contact_form', {
         title: 'Add New Contact',
@@ -51,6 +50,14 @@ router.post('/add', (req,res) => {
         phone
     }
     contacts.push(newContact);
+    res.redirect('/contacts');
+});
+
+router.post('/delete/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const index = contacts.findIndex(item => item.id == id);
+    if(index < 0) return res.status(404).send('Contact id not found');
+    contacts.splice(index, 1);
     res.redirect('/contacts');
 });
 
